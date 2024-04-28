@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "push/";
+
+service Push {
+  rpc PushToKafka(PushKafkaRequest) returns (PushKafkaResponse) {};
+  rpc PushToKafkaDelay(PushKafkaDelayRequest) returns (PushKafkaDelayResponse) {};
+}
+
+message PushKafkaRequest {
+  int64 id = 1;
+  string topic = 2;
+  string data = 3;
+}
+
+message PushKafkaResponse {
+  int64 id = 1;
+}
+
+message PushKafkaDelayRequest {
+  int64 id = 1;
+  string topic = 2;
+  string data = 3;
+  DelayEnum delay = 4;
+}
+
+message PushKafkaDelayResponse {
+  int64 id = 1;
+}
+
+enum DelayEnum {
+  _DelayEnumUnknown = 0;
+  DelayEnum1m = 1;
+  DelayEnum3m = 2;
+  DelayEnum10m = 3;
+  DelayEnum15m = 4;
+  DelayEnum30m = 5;
+}
