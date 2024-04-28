@@ -140,6 +140,7 @@ func cron(c *ConsumerDelayConfig, closeChan chan *struct{}, errChan chan error) 
 		return
 	}
 
+	log.Debug("consumer group")
 	for {
 		select {
 		case <-closeChan:
@@ -174,7 +175,7 @@ func cron(c *ConsumerDelayConfig, closeChan chan *struct{}, errChan chan error) 
 						return
 					}
 
-					err = client.Seek(msg.TopicPartition, 0)
+					_, err = client.SeekPartitions([]kafka.TopicPartition{msg.TopicPartition})
 					if err != nil {
 						errChan <- err
 						return
