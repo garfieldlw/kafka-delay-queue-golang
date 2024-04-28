@@ -24,3 +24,7 @@ func TestServiceIns_PushToKafkaDelay(t *testing.T) {
 	}
 }
 ```
+
+
+## Notes
+* kafka client base on github.com/confluentinc/confluent-kafka-go
